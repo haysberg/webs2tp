@@ -1,0 +1,123 @@
+table,
+table * {
+    border-spacing: 10px;
+    border-collapse: separate;
+    text-align: center;
+}
+
+th,
+td {
+    width: 10em;
+    border: 2px solid #1c5680;
+    color: white;
+    padding: 20px;
+    empty-cells: none;
+    height: 2.4em;
+    border-radius: 15px;
+    border-radius: 0.5em;
+    background-color: rgb(79, 129, 189);
+    border-color: rgb(59, 97, 142);
+    box-shadow: 2px 2px 2px black;
+    padding: 10px;
+    margin: 10px;
+}
+
+th:not(empty) {
+    border-radius: 0.5em;
+    background-color: rgb(79, 129, 189);
+    border-color: rgb(59, 97, 142);
+    font-weight: bold;
+}
+
+tr:nth-child(2) td:nth-child(3) {
+    background-color: blueviolet;
+}
+
+tr:nth-child(5) td:nth-child(n+3) {
+    background-color: #41b535;
+}
+
+table {
+    caption-side: bottom;
+}
+
+caption {
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+td:empty,
+th:empty {
+    border: dashed black;
+    box-shadow: none;
+    border-radius: 0em;
+    background-color: white;
+}
+
+th:empty {
+    border: none;
+}
+
+.hidden {
+    display: none;
+}
+
+tr:nth-child(7) td:nth-child(3) {
+    box-shadow: 20px 0px rgb(79, 129, 189);
+    position: relative;
+    border-right: none;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+tr:nth-child(1) td:nth-child(1):empty,
+tr:nth-child(10) td:nth-child(1):empty {
+    border: none;
+}
+
+tr td:nth-child(1) {
+    font-weight: bolder;
+}
+
+img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 20px;
+    height: auto;
+    animation-name: slide;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes slide {
+    0% {
+        top: 0;
+        left: 0;
+    }
+    25% {
+        top: 0;
+        left: 95%;
+    }
+    50% {
+        top: 80%;
+        left: 95%;
+    }
+    75% {
+        top: 80%;
+        left: 0;
+    }
+    100% {
+        top: 0;
+        left: 0;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+tr:nth-child(-n+7) td:nth-child(1):not(empty) {
+    vertical-align: top;
+}
