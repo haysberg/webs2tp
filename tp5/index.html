@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primes - Téo Haÿs</title>
+</head>
+
+<body>
+    <form method="get" id="primeForm">
+        <label for="n">Number :</label><br>
+        <input type="text" id="n" name="n" value="1337"><br>
+        <input type="submit" value="Go">
+    </form>
+    <div id="resultat">
+
+    </div>
+</body>
+
+<script>
+    document.getElementById("primeForm").addEventListener("submit", function (e) {
+        e.preventDefault() //to block page reload
+        number = document.querySelector("#n").value
+        console.log(number)
+        fetch('http://localhost/cgi-bin/td3.py?n=' + number)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (json) {
+                console.log(json);
+                doc = document.querySelector("#primeForm")
+                inner = "<p>"
+                console.log(json.prime_factors)
+                primes = json.prime_factors
+                for (prime in primes){
+                    console.log(prime.prime)
+                    inner += primes[prime].prime
+                    if (primes[prime].power > 1){
+                        inner += "<sup>" + primes[prime].power + "</sup>"
+                    }
+                    if (prime < primes.length-1){
+                        inner += " &times;"
+                    }
+                }
+                document.querySelector("#resultat").innerHTML = inner;
+            });
+
+        return false;
+    })
+</script>
+
+</html>
