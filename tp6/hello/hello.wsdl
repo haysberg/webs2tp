@@ -1,0 +1,87 @@
+<!--  
+Teo Hays
+2022-03-07
+Says hello to you given a name
+
+Online WSDL 1.1 SOAP generator 0.2
+Julien Blitte
+  -->
+<definitions xmlns:tns="localdomain.wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="localdomain.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="Says hello to you given a name" targetNamespace="localdomain.wsdl">
+	<!--  definition of datatypes  -->
+	<types>
+		<schema xmlns="http://www.w3.org/2000/10/XMLSchema" targetNamespace="localdomain.xsd">
+			<element name="nickname">
+				<complexType>
+					<all>
+						<element name="value" type="string" />
+					</all>
+				</complexType>
+			</element>
+			<element name="message">
+				<complexType>
+					<all>
+						<element name="value" type="string" />
+					</all>
+				</complexType>
+			</element>
+			<element name="void">
+				<complexType>
+					<sequence />
+				</complexType>
+			</element>
+		</schema>
+	</types>
+	<!--  response messages  -->
+	<message name="returns_message">
+		<part name="message" type="xsd:message" />
+	</message>
+	<!--  request messages  -->
+	<message name="hello">
+		<part name="void" type="xsd:void" />
+	</message>
+	<message name="hello_name">
+		<part name="nickname" type="xsd:nickname" />
+	</message>
+	<!--  server's services  -->
+	<portType name="helloService">
+		<operation name="hello">
+			<input message="tns:hello" />
+			<output message="tns:returns_message" />
+		</operation>
+		<operation name="hello_name">
+			<input message="tns:hello_name" />
+			<output message="tns:returns_message" />
+		</operation>
+	</portType>
+	<!--  server encoding  -->
+	<binding name="helloService_webservices" type="tns:helloService">
+		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="hello">
+			<soap:operation soapAction="urn:xmethods-delayed-quotes#hello" />
+			<input>
+				<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="hello_name">
+			<soap:operation soapAction="urn:xmethods-delayed-quotes#hello_name" />
+			<input>
+				<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded" namespace="urn:xmethods-delayed-quotes" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+	<!--  access to service provider  -->
+	<service name="tp6">
+		<port name="tp6_0" binding="helloService_webservices">
+			<soap:address location="http://localhost:8000/hello/" />
+		</port>
+		<port name="tp6_1" binding="helloService_webservices">
+			<soap:address location="http://localhost:8000/hello/nickname" />
+		</port>
+	</service>
+</definitions>
